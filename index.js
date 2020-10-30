@@ -35,9 +35,11 @@ module.exports = (app) => {
     const username = context.payload.pull_request.user.login;
     const milestone = context.payload.pull_request.milestone;
 
+    console.info({ username });
+
     if (milestone == null) {
       if (allowListGitHubUsernames.includes(username)) {
-        app.log.info("username is skipped => passing the status check");
+        app.log.info("Username is skipped => passing the status check");
         return createStatus(
           context,
           owner,
@@ -94,7 +96,7 @@ module.exports = (app) => {
     const issue = await context.github.issues.get({
       owner: context.payload.repository.owner.login,
       repo: context.payload.repository.name,
-      number: context.payload.issue.number,
+      issue_number: context.payload.issue.number,
     });
 
     if (issue.data.pull_request != null) {
@@ -104,7 +106,7 @@ module.exports = (app) => {
       const pr = await context.github.pulls.get({
         owner: context.payload.repository.owner.login,
         repo: context.payload.repository.name,
-        number: context.payload.issue.number,
+        pull_number: context.payload.issue.number,
       });
 
       const owner = pr.data.base.repo.owner.login;
@@ -112,6 +114,7 @@ module.exports = (app) => {
       const sha = pr.data.head.sha;
       const username = pr.data.base.user.login;
       const milestone = pr.data.milestone;
+      console.info({ username });
 
       if (milestone == null) {
         if (allowListGitHubUsernames.includes(username)) {
