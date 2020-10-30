@@ -162,10 +162,6 @@ module.exports = (app) => {
     }
   });
 
-  app.on("*", function (req, res) {
-    return res.status(404).end();
-  });
-
   // For more information on building apps:
   // https://probot.github.io/docs/
 
