@@ -5,7 +5,7 @@ const failure_backlog_description = "Incorrect Milestone! Should be Release.";
 const success_state = "success";
 const success_description = "Great, the milestone is set.";
 const skipped_description = "The milestone is not required. (skipped)";
-const allowListGitHubUsernames = ["renovate", "renovate-bot"];
+const allowListGitHubUsernames = ["renovate[bot]"];
 
 function createStatus(context, owner, repo, sha, state, desc) {
   return context.github.repos.createStatus({
@@ -34,8 +34,6 @@ module.exports = (app) => {
     const sha = context.payload.pull_request.head.sha;
     const username = context.payload.pull_request.user.login;
     const milestone = context.payload.pull_request.milestone;
-
-    console.info({ username });
 
     if (milestone == null) {
       if (allowListGitHubUsernames.includes(username)) {
@@ -114,7 +112,6 @@ module.exports = (app) => {
       const sha = pr.data.head.sha;
       const username = pr.data.base.user.login;
       const milestone = pr.data.milestone;
-      console.info({ username });
 
       if (milestone == null) {
         if (allowListGitHubUsernames.includes(username)) {
