@@ -162,7 +162,7 @@ module.exports = (app) => {
     }
   });
 
-  app.get("*", function (req, res) {
+  app.on("*", function (req, res) {
     return res.status(404).end();
   });
 
