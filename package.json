@@ -30,7 +30,7 @@
     "standard": "^16.0.0"
   },
   "engines": {
-    "node": ">= 12"
+    "node": "12.x"
   },
   "standard": {
     "env": [
