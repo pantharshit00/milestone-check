@@ -5,7 +5,7 @@ const failure_backlog_description = "Incorrect Milestone! Should be Release.";
 const success_state = "success";
 const success_description = "Great, the milestone is set.";
 const skipped_description = "The milestone is not required. (skipped)";
-const allowListGitHubUsernames = ["renovate[bot]"];
+const allowListGitHubUsernames = ["renovate[bot]", "prisma-bot"];
 
 function createStatus(context, owner, repo, sha, state, desc) {
   return context.github.repos.createStatus({
